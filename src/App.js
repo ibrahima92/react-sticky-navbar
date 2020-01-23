@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import Welcome from "./components/Header/Welcome";
+import Navbar from "./components/Header/Navbar";
 
 function App() {
+  useEffect(() => {
+    return () => {
+      window.removeEventListener("scroll", () => handleScroll);
+    };
+  }, []);
+
+  const [isSticky, setSticky] = useState(false);
+
+  const stickyRef = useRef(null);
+  const handleScroll = () => {
+    window.pageYOffset > stickyRef.current.getBoundingClientRect().bottom
+      ? setSticky(true)
+      : setSticky(false);
+  };
+
+  // This function handle the scroll performance issue
+  const debounce = (func, wait = 20, immediate = true) => {
+    let timeOut;
+    return () => {
+      let context = this,
+        args = arguments;
+      const later = () => {
+        timeOut = null;
+        if (!immediate) func.apply(context, args);
+      };
+      const callNow = immediate && !timeOut;
+      clearTimeout(timeOut);
+      timeOut = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
+  window.addEventListener("scroll", debounce(handleScroll));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Navbar sticky={isSticky} />
+      <Welcome stickyRef={stickyRef} />
+    </Fragment>
   );
 }
 

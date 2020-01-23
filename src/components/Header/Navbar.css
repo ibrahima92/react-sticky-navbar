@@ -1,0 +1,60 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2.5rem;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+
+.navbar-sticky {
+  background: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 1px 1px 1px #222;
+  animation: bumpDown 0.5s ease-in-out;
+}
+
+.navbar--logo-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar--logo {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  animation: rotate 0.7s ease-in-out 0.5s;
+}
+
+.navbar--link {
+  display: flex;
+  list-style: none;
+}
+
+.navbar--link-item {
+  margin: 0.4rem 1rem 0 0;
+  padding: 0 0.3rem;
+  cursor: pointer;
+}
+
+@keyframes bumpDown {
+  from {
+    transform: translateY(-5rem);
+  }
+  to {
+    transform: translateY(0rem);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(360deg);
+  }
+  100% {
+    transform: rotateY(0rem);
+  }
+}
