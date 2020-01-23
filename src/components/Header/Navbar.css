@@ -14,7 +14,7 @@
   top: 0;
   left: 0;
   box-shadow: 1px 1px 1px #222;
-  animation: bumpDown 0.5s ease-in-out;
+  animation: moveDown 0.5s ease-in-out;
 }
 
 .navbar--logo-holder {
@@ -41,7 +41,7 @@
   cursor: pointer;
 }
 
-@keyframes bumpDown {
+@keyframes moveDown {
   from {
     transform: translateY(-5rem);
   }
